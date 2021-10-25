@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+
+    int t,a,b,c,n;
+    scanf("%d",&t);
+    
+    for(int i=t;i>0;i--){
+        scanf("%d %d %d %d", &a, &b, &c, &n);
+        if((a+b+c+n)%3==0){
+            printf("YES\n");
+        }else{
+            printf("NO\n");
+        }
+    }
+    
+    return 0;
+}
