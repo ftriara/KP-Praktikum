@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+
+    int n,modus,count,M=1;
+    scanf("%d",&n);
+    
+    int array[n];
+    for(int i=0;i<n;i++){
+        scanf("%d", &array[i]);
+    }
+    modus=array[0];
+    for(int i=0;i<n;i++){
+        if(array[i]>0){
+            count=1;
+            for(int j=i+1;j<=n;j++){
+                if(array[i]==array[j]){
+                    array[j]=0;
+                    count=count+1;
+                }
+            }
+            if(count>M){
+                M=count;
+                modus=array[i];
+            }
+            else{
+                if(count==M){
+                    if(array[i]>modus){
+                        M=count;
+                        modus=array[i];
+                    }
+                }
+            }
+        }
+    }
+    
+    printf("%d",modus);
+    
+    return 0;
+}
