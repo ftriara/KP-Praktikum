@@ -22,12 +22,12 @@ input item[] =
 
 //Enumeration untuk bagian menu
 enum Menu{
-    elist=1,
-    ewrite,
-    eread,
-    eupdate,
-    eexit
-};
+    elist=1, // eList
+    ewrite, // eWrite
+    eread, // eRead
+    eupdate, // eUpdate
+    eexit // eExit
+}; // @ kalo variable biasain awal kata kedua dibuat huruf besar
 
 //Enumeration untuk fungsi update
 enum Update{
@@ -47,18 +47,24 @@ int main()
 {
     int pilih;
     printf("\n=====Menu Program=====\n");
-    const char *menuName[] = {"", "Tampilkan isi array",
-                                  "Tulis data ke binary file",
-                                  "Baca data dari binary file",
-                                  "Update data",
-                                  "Keluar dari program"};
-        for(enum Menu menu = elist; menu<=eexit; ++menu){
-            printf("%d. %s\n", menu, menuName[menu]);
-        }
+    const char *menuName[] = {
+      "",  // @ kalo mau dibuat kebawah jangan nanggung, dn jangan di sama ratain dengan sama dengan, cukup kasih 1 spasi dari baris awal
+      "Tampilkan isi array", 
+      "Tulis data ke binary file",
+      "Baca data dari binary file",
+      "Update data",
+      "Keluar dari program"
+    };
+    // @ tiap abis buat logika atau define variable kasih jarak tapi jangan kejauhan
+    for(enum Menu menu = elist; menu<=eexit; ++menu){
+        printf("%d. %s\n", menu, menuName[menu]);
+    }
+    // @ tiap abis buat logika atau define variable kasih jarak tapi jangan kejauhan
     while(1){
         printf("\nMasukkan pilihan menu : ");
         scanf("%d", &pilih);
-        if(pilih == elist){
+        // @ tiap abis buat logika atau define variable kasih jarak tapi jangan kejauhan
+        if(pilih == elist){ // @ tiap kurung kurawal kasih spasi
             listdata();
         }else if(pilih == ewrite){
             writedata();
@@ -78,10 +84,10 @@ int main()
 }
 
 //function listdata() untuk menampilkan array of struct
-void listdata()
+void listdata() 
 {
     printf("\n%-20s %-50s %5s\n","Nomor Seri","Judul Buku","Jumlah Stok");
-    for(int i = 0 ; i < 7 ; i++){
+    for(int i = 0 ; i < 7 ; i++){ // @ kalo looping array jangan dibiasain ngasih batasan sendiri, pake jumlah isi array untuk kondisi
         printf("%-20s %-50s %5u\n", item[i].nomor, item[i].buku, item[i].stok);
     }
     printf("\n");
@@ -93,8 +99,8 @@ void writedata()
     FILE *fPtr;
     fPtr = fopen("perpustakaan.bin", "wb");
     if(fPtr != NULL){
-            for(int i = 0; i < 7; i++){
-                fwrite(item[i].nomor, 10 * sizeof(char), 1, fPtr);
+            for(int i = 0; i < 7; i++){ // @ ini juga, kan ada fungsi sizeof di c 
+                fwrite(item[i].nomor, 10 * sizeof(char), 1, fPtr); // @ lah ini dipakek, kok nggak dipake buat kondisi looping?
                 fwrite(item[i].buku, 50 * sizeof(char), 1, fPtr);
                 fwrite(&item[i].stok, sizeof(int), 1, fPtr);
             }
@@ -110,7 +116,7 @@ void writedata()
 void readdata()
 {
     FILE *fPtr;
-    fPtr = fopen("perpustakaan.bin", "rb");
+    fPtr = fopen("perpustakaan.bin", "rb"); // @ kasih jarah
     if(fPtr != NULL){
         printf("\n%-20s %-50s %5s\n","Nomor Seri","Judul Buku","Jumlah Stok");
         for(int i = 0; i < 7; i++){
@@ -137,20 +143,20 @@ void updatedata()
     printf("\nMasukkan line yang ingin diubah : ");
     scanf("%d",&ubah);
 
-    input data[] = {0};
+    input data[] = {0}; // @ ini kenapa define di tengah? kalo define variiable biasain di satu tempat kecuali kondisi khusus
 
     printf("\n###Perubahan Data###\n");
-    const char *ubahName[] = {"", "Nomor seri buku",
+    const char *ubahName[] = {"", "Nomor seri buku", // @ ni juga sama kaya kasus diatas
                                   "Judul buku",
                                   "Stok buku",
                                   "Semua data buku"};
-        for(enum Update update = enomor; update<=eall; ++update){
+        for(enum Update update = enomor; update<=eall; ++update){ // ni juga
             printf("%d. %s\n", update, ubahName[update]);
         }
     while(1){
         printf("\nMasukkan pilihan perubahan data : ");
         scanf("%d", &pilih);
-        switch(pilih){
+        switch(pilih){ // @ tiap fungsi sama logic kasih jarak sama yg atas
             case enomor:
                 printf("Nomor seri lama               : %s\n",item[ubah-1].nomor);
                 printf("Masukkan nomor seri yang baru : ");
